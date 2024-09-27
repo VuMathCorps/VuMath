@@ -36,6 +36,9 @@ window.onload = function() {
     generateButton.addEventListener('click', function() {
         if (storedImages.length > 0||promptText!='') {
 
+
+
+            
         } else {
             console.log("No images or text added");
         }
