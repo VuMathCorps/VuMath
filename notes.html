@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VuMath - notes</title>
+    <title>VuMath - Ai-notes</title>
     <link rel="stylesheet" href="styles.css">
     <script src="load-sidebar.js"></script>
+    <script src="notes.js"></script>
 </head>
 <body>
     <div id="main">
@@ -14,10 +15,19 @@
         </div>
 
         <header>
-            <h1 id="title">Welcome to VuMath</h1>
+            <h1 id="title">Note Generation</h1>
         </header>
         <main>
-            <p id="pText">Welcome People and Aliens alike</p>
+            <section id="note-generation">
+                <form id="note-form">
+                    <label for="note-prompt">Enter your prompt (optional):</label>
+                    <textarea id="note-prompt" name="note-prompt" rows="4" cols="50"></textarea>
+                    
+                    <label for="note-image">Attach an image:</label>
+                    <input type="file" id="note-image" name="note-image" accept="image/*" multiple>
+                    <button type="submit" id ="generate-button" >Generate Note</button>  
+                </form>
+            </section>
         </main>
         <footer>
             <p align="center">&copy; 2024 VuMath. All rights reserved.</p>
