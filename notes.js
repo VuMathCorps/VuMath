@@ -4,11 +4,11 @@ window.onload = function() {
     var generateButton = document.getElementById('generate-button');
     var storedImages = [];
     var promptText = '';
-
+    //updates the prompt text when the user inputs new text
     textInput.addEventListener('input', function() {
         promptText = textInput.value;
     });
-
+    //update the images when the user selects new images
     fileInput.addEventListener('change', function() {
         var files = fileInput.files;
         var imageType = /image.*/;
@@ -32,12 +32,12 @@ window.onload = function() {
             }
         }
     });
-
+    //generate botton is clicked and notes will be created
     generateButton.addEventListener('click', function() {
         if (storedImages.length > 0||promptText!='') {
 
 
-
+            //here is where the notes will be generated
             
         } else {
             console.log("No images or text added");
