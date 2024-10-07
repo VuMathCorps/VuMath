@@ -47,11 +47,6 @@ app.post('/process-input', async (req, res) => {
                 ]
             }];
 
-            console.log('Sending request to OpenAI with message structure:', 
-                JSON.stringify(messages, (key, value) => 
-                    key === 'image_url' ? '[IMAGE DATA]' : value
-                )
-            );
 
             const response = await openai.chat.completions.create({
                 model: "gpt-4o-mini",
