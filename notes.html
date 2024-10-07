@@ -6,14 +6,12 @@
     <title>VuMath - Ai-notes</title>
     <link rel="stylesheet" href="styles.css">
     <script src="load-sidebar.js"></script>
-    <script src="notes.js"></script>
-</head>
+    <script type="module" src="notes.js"></script></head>
 <body>
     <div id="main">
         <div class="topbar">
             <button class="openbtn" onclick="openNav()">&#9776;</button>
         </div>
-
         <header>
             <h1 id="title">Note Generation</h1>
         </header>
@@ -27,6 +25,9 @@
                     <input type="file" id="note-image" name="note-image" accept="image/*" multiple>
                     <button type="submit" id ="generate-button" >Generate Note</button>  
                 </form>
+            </section>
+            <section id="generated-notes">
+                <h2>Generated LaTeX Notes</h2>
             </section>
         </main>
         <footer>
