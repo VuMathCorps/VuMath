@@ -3,7 +3,13 @@ body {
   padding: 0;
   font-family: Arial, sans-serif;
 }
-
+.latex-content {
+  padding: 20px;
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-family: 'Computer Modern', serif;
+} 
 .topbar {
   background-color: #333;
   color: white;

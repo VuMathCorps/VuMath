@@ -27,7 +27,9 @@ window.onload = function () {
         });
     });
 
-    generateButton.addEventListener('click', async function () {
+    generateButton.addEventListener('click', async function (event) {
+        event.preventDefault(); 
+
         if (storedImages.length === 0 && !promptText) {
             alert("Please add some text or images before generating notes.");
             return;
@@ -38,7 +40,11 @@ window.onload = function () {
             generatedNotesSection.innerHTML = '<p>Generating notes...</p>';
 
             const formData = new FormData();
-            formData.append('prompt', promptText || '');
+            formData.append('prompt', escapeLatex(promptText) + 
+                ' Generate LaTeX notes based on this prompt and/or the provided images. ' +
+                'Return only the LaTeX code without the document class, preamble, and document environment. ' +
+                'Start  with the content, using only the necessary LaTeX commands for formatting.' +
+                'Do not include \\begin{document} or \\end{document}.');
             storedImages.forEach((img, index) => {
                 formData.append(`image${index}`, img);
             });
@@ -49,22 +55,28 @@ window.onload = function () {
             });
 
             const data = await response.json();
-
-            /*if (!response.ok) {
-                throw new Error(`Server error: ${data.details || data.error || 'Unknown err'}`);
-            }*/
-
+            const generator = new latexjs.HtmlGenerator({ hyphenate: false });
+            const parsed = latexjs.parse(data.response, { generator: generator });
+            const latexHTML = generator.domFragment().firstElementChild.outerHTML;
+            const latexContainer = document.createElement('div');
+            latexContainer.className = 'latex-content';
+            latexContainer.innerHTML = latexHTML;
             generatedNotesSection.innerHTML = `
-                <h2>Generated LaTeX Notes</h2>
-                <div class="note">${data.response}</div>
-            `;
+            <h2>Generated LaTeX Notes</h2>
+            <div class="note"><pre>${data.response}</pre></div>
+        `;
+            generatedNotesSection.appendChild(latexContainer);
+
         } catch (error) {
             console.error('Failed to generate notes:', error);
             generatedNotesSection.innerHTML = `
-                <p class="error">Failed to generate notes: ${error.message}</p>
+                <p>Failed to generate notes: ${error.message}</p>
             `;
         } finally {
             generateButton.disabled = false;
         }
     });
+    function escapeLatex(text) {
+        return text.replace(/([#%&_\${}])/g, '\\$1');
+    }
 };
