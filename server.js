@@ -54,7 +54,7 @@ app.post('/process-input', async (req, res) => {
                 max_tokens: 1000,
             });
 
-            res.json({ response: response.choices[0].message.content });
+            res.json({ response: response.choices[0].message.content,url:"https://latexonline.cc/compile?text="+encodeURIComponent(response.choices[0].message.content) });
         } catch (error) {
 			console.log('Failed to generate notes: ', error);
         }
